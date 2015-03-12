@@ -48,11 +48,14 @@ final class File extends Models\Model {
 	 * @param string $name
 	 * @param string $path
 	 */
-	public function __construct($name, $path = "") {
+	public function __construct($name, $path = "", $ext = "", $mime_type = "") {
 		parent::__construct(get_class());
 		
 		$this->setName($name);
 		$this->setPath($path);
+		$this->setExtension($ext);
+		$this->setMimeType($mime_type);
+	
 		$this->init();
 	}
 	
@@ -137,6 +140,10 @@ final class File extends Models\Model {
 	public function getExtension () {
 		return $this->ext;
 	}
+	
+	public function setExtension ($ext = "") {
+		$this->ext =  $ext;
+	}
 
 	/**
 	 * 
@@ -154,6 +161,10 @@ final class File extends Models\Model {
 	
 	public function getMimeType () {
 		return $this->mime_type;
+	}
+	
+	public function setMimeType ($mime_type = "") {
+		$this->mime_type = $mime_type;
 	}
 	
 	public function getExt () {
@@ -192,17 +203,25 @@ final class File extends Models\Model {
 	
 	private function init () {
 		if (!empty($this->path) && file_exists($this->path)) {
-			$this->mime_type = mime_content_type($this->path);
+			
+			//$this->mime_type = '';
+			//$finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+			//$this->mime_type = finfo_file($finfo, $this->path);
+			//finfo_close($finfo);
+			
 			$this->data = base64_encode(file_get_contents($this->path));
 			$this->size = filesize($this->path);
-			$this->ext = pathinfo($this->path, PATHINFO_EXTENSION);
-			
-			if (empty($this->ext) && !empty($this->mime_type)) {
-				$this->ext = self::getExtFromMime($this->mime_type);
-			}
 			
 			if (empty($this->ext)) {
-				throw new \Exception("Could not determine extension of file '{$this->path}'");
+				$this->ext = pathinfo($this->path, PATHINFO_EXTENSION);
+				
+				if (empty($this->ext) && !empty($this->mime_type)) {
+					$this->ext = self::getExtFromMime($this->mime_type);
+				}
+				
+				if (empty($this->ext)) {
+					throw new \Exception("Could not determine extension of file '{$this->path}'");
+				}
 			}
 			
 			if (empty($this->mime_type)) {

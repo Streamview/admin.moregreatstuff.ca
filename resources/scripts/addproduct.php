@@ -13,18 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	//exit;
 	
 	if (empty($_REQUEST['code'])) {
-		$this->errors[] = "Provide a product code";
+		$errors[] = "Provide a product code";
 	} elseif (empty($_REQUEST['name'])) {
-		$this->errors[] = "Provide a name for the product";
+		$rrors[] = "Provide a name for the product";
 	} elseif (empty($_REQUEST['quantity'])) {
-		$this->errors[] = "Specify a quantity";
+		$errors[] = "Specify a quantity";
 	} elseif (empty($_REQUEST['price'])) {
-		$this->errors[] = "Provide a price for the product";
+		$errors[] = "Provide a price for the product";
 	} elseif (empty($_REQUEST['description'])) {
-		$this->errors[] = "Provide a description for the product";
+		$errors[] = "Provide a description for the product";
 	} else {
 		$dbh = Helpers\Db::getInstance();
-		$dbh->begin_transaction();
+		//$dbh->begin_transaction();
 			
 		$product = getProduct();
 		if (empty($product)) {
@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$img = $product->getImg();
 	
 			if (empty($img)) {
-				$img = new Models\File($_FILES['img']['name'], $_FILES['img']['tmp_name']);
+				$img = new Models\File($_FILES['img']['name'], $_FILES['img']['tmp_name'], "", $_FILES['img']['type']);
 			} else {
-				$img->reconstruct($_FILES['img']['name'], $_FILES['img']['tmp_name']);
+				$img->reconstruct($_FILES['img']['name'], $_FILES['img']['tmp_name'], "", $_FILES['img']['type']);
 			}
 	
 			$img->save();
@@ -51,19 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} else {
 			$img = $product->getImg();
 			if (empty($img)) {
-				$img = new Models\File("package.png", "/home/houspcom/public_html/admin.moregreatstuff.ca/resources/img/package.png");
+				$img = new Models\File("package.png", "/home/houspcom/public_html/admin.moregreatstuff.ca/resources/img/package.png", "png", "image/png");
 				$img->save();
 				$product->img_id = $img->id;
 			}
 		}
 	
 		if ($product->save()) {
-			$dbh->commit();
+			//$dbh->commit();
 			$success = true;
 			$message = "Product successfully saved";
 			$product_id = $product->id;
 		} else {
-			$dbh->rollback();
+			//$dbh->rollback();
 			$errors[] = "Unable to save product";
 		}
 	}
