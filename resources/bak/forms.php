@@ -12,29 +12,29 @@
 
 
   <!-- Stylesheets -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font awesome icon -->
-  <link rel="stylesheet" href="css/font-awesome.min.css"> 
+  <link rel="stylesheet" href="/css/font-awesome.min.css"> 
   <!-- jQuery UI -->
-  <link rel="stylesheet" href="css/jquery-ui.css"> 
+  <link rel="stylesheet" href="/css/jquery-ui.css"> 
   <!-- Calendar -->
-  <link rel="stylesheet" href="css/fullcalendar.css">
+  <link rel="stylesheet" href="/css/fullcalendar.css">
   <!-- prettyPhoto -->
-  <link rel="stylesheet" href="css/prettyPhoto.css">  
+  <link rel="stylesheet" href="/css/prettyPhoto.css">  
   <!-- Star rating -->
-  <link rel="stylesheet" href="css/rateit.css">
+  <link rel="stylesheet" href="/css/rateit.css">
   <!-- Date picker -->
-  <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
   <!-- CLEditor -->
-  <link rel="stylesheet" href="css/jquery.cleditor.css"> 
+  <link rel="stylesheet" href="/css/jquery.cleditor.css"> 
   <!-- Data tables -->
-  <link rel="stylesheet" href="css/jquery.dataTables.css"> 
+  <link rel="stylesheet" href="/css/jquery.dataTables.css"> 
   <!-- Bootstrap toggle -->
-  <link rel="stylesheet" href="css/jquery.onoff.css">
+  <link rel="stylesheet" href="/css/jquery.onoff.css">
   <!-- Main stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
   <!-- Widgets stylesheet -->
-  <link href="css/widgets.css" rel="stylesheet">   
+  <link href="/css/widgets.css" rel="stylesheet">   
   
   <script src="js/respond.min.js"></script>
   <!--[if lt IE 9]>
